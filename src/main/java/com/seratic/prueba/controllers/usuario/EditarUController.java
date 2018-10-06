@@ -7,6 +7,7 @@ package com.seratic.prueba.controllers.usuario;
 
 import com.seratic.prueba.modelos.Usuario;
 import com.seratic.prueba.util.ConexBD;
+import com.seratic.prueba.util.Encriptar;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
@@ -42,17 +43,16 @@ public class EditarUController {
         HttpSession session = request.getSession();
         String sesion = (String)session.getAttribute("session");
         
-        //if (sesion == "si"){
+        if (sesion == "si"){
             ModelAndView mav = new ModelAndView();
             int id = Integer.parseInt(request.getParameter("id"));
             Usuario datos = this.selectUsuario(id);
-           // String desencriptado = Util.Desencriptar(datos.getClave());//desencripto la contraseña
             mav.setViewName("usuarios/editarUsuario");
             mav.addObject("usuario",new Usuario(id,datos.getNombre(),datos.getUsuario(),datos.getContrasena(),datos.getTipo()));
             return mav;  
-      // } else {
-     //       return new ModelAndView("redirect:/login.htm");  
-  //    }    
+       } else {
+          return new ModelAndView("redirect:/login.htm");  
+      }    
         
         
     }
@@ -62,7 +62,7 @@ public class EditarUController {
                                 BindingResult result,
                                 SessionStatus status,
                                 HttpServletRequest request){
-           // String pass = Util.Encriptar(u.getClave());   
+            String pass = Encriptar.Encriptar(u.getContrasena());   
             String id=request.getParameter("id");
             String sql= "UPDATE usuarios SET  nombre = ?, usuario = ?, contrasena = ?, tipo = ? WHERE id = ?";
 

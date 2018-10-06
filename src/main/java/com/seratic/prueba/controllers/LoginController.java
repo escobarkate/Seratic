@@ -7,6 +7,7 @@ package com.seratic.prueba.controllers;
 
 import com.seratic.prueba.modelos.Usuario;
 import com.seratic.prueba.util.ConexBD;
+import com.seratic.prueba.util.Encriptar;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -39,27 +40,34 @@ public class LoginController {
     @GetMapping
     public ModelAndView login(HttpServletRequest hsr){        
       
+        HttpSession session = hsr.getSession();
+       String sesion = (String)session.getAttribute("session");
+       
+       if (sesion == "si"){
+            return new ModelAndView("redirect:/home.htm"); 
+       } else {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("login");
             mav.addObject("usuario", new Usuario());
             return mav;
             
-       
+        }
         
     }
     
-    @PostMapping
+     @PostMapping
     public ModelAndView login (@ModelAttribute("usuario") Usuario u,
                                 BindingResult result,
-                               HttpServletRequest hsr){         
-        
-        String sql="SELECT * FROM usuarios WHERE usuario='"+u.getUsuario()+"' AND contrasena='"+u.getContrasena()+"' AND tipo='administrador'";
+                                SessionStatus status,HttpServletRequest hsr){         
+        HttpSession session = hsr.getSession();
+        String pass = Encriptar.Encriptar(u.getContrasena());
+        String sql="SELECT * FROM usuarios WHERE usuario='"+u.getUsuario()+"' AND contrasena='"+pass+"' AND tipo='administrador'";
         List datos = this.jdbcTemplate.queryForList(sql);
         if (datos.size() > 0){            
-           
+            session.setAttribute("session", "si");
             return new ModelAndView("redirect:/home.htm");            
         }else{
             return new ModelAndView("redirect:/login.htm");
         }                              
-        }  
+        }
 }
