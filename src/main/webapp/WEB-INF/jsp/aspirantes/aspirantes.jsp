@@ -11,7 +11,19 @@
         <!-- css -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="<c:url value='/css/materialize.css'/>" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <link href="<c:url value='/css/style.css'/>" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="<c:url value='/css/style.css'/>" type="text/css" rel="stylesheet" media="screen,projection"<nav class="liteal lighten-5" role="navigation">
+            <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo right">MonstersUniversity</a>
+                <ul class="left hide-on-med-and-down">
+
+                    <li><a href="login.htm">Cerrar</a></li>
+                    <li><a href="usuarios.htm"> Gestión de usuarios</a></li>
+                    <li><a href="aspirantes.htm">Gestión de aspirantes</a></li>
+                    <li><a href="pruebas.htm">Gestión de pruebas</a></li>
+                    <li><a href="reportes.htm">Reportes</a></li>
+                </ul>
+
+            </div>
+        </nav>/>
     </head>
     <body>
         <nav class="liteal lighten-5" role="navigation">

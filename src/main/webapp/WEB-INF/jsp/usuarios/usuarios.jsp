@@ -27,6 +27,70 @@
 
             </div>
         </nav>
-        <h1>Pruebas</h1>
+    <body>             
+        <div class="container">                               
+            <center><h3 style="color:grey darken-3">Gestión de Usuarios</h3></center>
+            <br/>   
+            <br/> 
+
+            <div class="row" align="right">                        
+                <div class="col s12">                    
+                    <a href="agregarUsuario.htm"  class="modal-trigger btn-large waves-effect waves-yellow green"><i class="material-icons left">add_circle</i>Agregar Usuario</a>
+                </div>
+            </div>
+            <table id="tabla" class="striped centered responsive-table">  
+                <thead>                          
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Contrasena</th>
+                        <th>Tipo</th>  
+                        <th>Fecha de Registro</th>  
+                        <th></th>
+
+                    </tr> 
+                </thead>  
+
+
+                <tbody> 
+                    <c:forEach items="${usuarios}" var="usuarios">  
+                        <tr>                                                                        
+                            <td><c:out value="${usuarios.id}" /></td>
+                            <td><c:out value="${usuarios.nombre}" /></td>
+                            <td><c:out value="${usuarios.usuario}" /></td>
+                            <td><c:out value="${usuarios.contrasena}" /></td>
+                            <td><c:out value="${usuarios.tipo}" /></td>   
+                            <td><c:out value="${usuarios.fecha}" /></td> 
+                            <td>
+                                <a title="Eliminar" href="<c:url value="eliminarUsuario.htm?id=${usuarios.id}"/>"><i Style="color:#546e7a;" class="material-icons">delete</i></a>
+                       
+                               
+                                <a title="Editar" href="<c:url value="editarUsuario.htm?id=${usuarios.id}"/>"><i Style="color:#546e7a;" class="material-icons">edit</i></a>
+                            </td>                                        
+                        </tr>
+
+
+                     
+                </c:forEach>
+                <tbody>                                  
+            </table>
+
+            <
+
+        </div>
     </body>
-</html>s
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="<c:url value='/js/materialize.js'/>"></script>
+    <script src="<c:url value='/js/init.js'/>"></script>    
+
+    <script>
+        $('.modal').modal();
+    </script> 
+</body>
+</html>
