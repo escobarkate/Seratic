@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.seratic.prueba.controllers.usuario;
+package com.seratic.prueba.controllers.aspirantes;
 
+import com.seratic.prueba.modelos.Aspirante;
 import com.seratic.prueba.modelos.Usuario;
 import com.seratic.prueba.util.ConexBD;
 import com.seratic.prueba.util.Encriptar;
@@ -29,11 +30,12 @@ import org.springframework.web.servlet.ModelAndView;
  * @author PLANTA INTERNA
  */
 @Controller 
-@RequestMapping("editarUsuario.htm")
-public class EditarUController {
-     private JdbcTemplate jdbcTemplate;
+@RequestMapping("editarAspirante.htm")
 
-    public EditarUController() {
+public class EditarAController {
+    private JdbcTemplate jdbcTemplate;
+
+    public EditarAController() {
         ConexBD con = new  ConexBD();
         this.jdbcTemplate = new JdbcTemplate(con.conectar());
     }
@@ -46,9 +48,9 @@ public class EditarUController {
         if (sesion == "si"){
             ModelAndView mav = new ModelAndView();
             int id = Integer.parseInt(request.getParameter("id"));
-            Usuario datos = this.selectUsuario(id);
-            mav.setViewName("usuarios/editarUsuario");
-            mav.addObject("usuario",new Usuario(id,datos.getNombre(),datos.getUsuario(),datos.getContrasena(),datos.getTipo()));
+            Aspirante d = this.selectUsuario(id);
+            mav.setViewName("aspirantes/editarAspirante");
+            mav.addObject("usuario",new Aspirante(id,d.getNombre(),d.getCarrera(),d.getTelefono(),d.getCorreo()));
             return mav;  
        } else {
           return new ModelAndView("redirect:/login.htm");  
@@ -58,36 +60,37 @@ public class EditarUController {
     }
     
     @PostMapping
-    public ModelAndView edituser(@ModelAttribute("usuario") Usuario u,
+    public ModelAndView edituser(@ModelAttribute("usuario") Aspirante u,
                                 BindingResult result,
                                 SessionStatus status,
                                 HttpServletRequest request){
-            String pass = Encriptar.Encriptar(u.getContrasena());   
+ 
             String id=request.getParameter("id");
-            String sql= "UPDATE usuarios SET  nombre = ?, usuario = ?, contrasena = ?, tipo = ? WHERE id = ?";
+            String sql= "UPDATE aspirantes SET  nombre = ?, carrera = ?, telefono = ?, correo= ? WHERE id = ?";
 
             this.jdbcTemplate.update(
-                    sql,  u.getNombre(),u.getUsuario(),pass,u.getTipo(),id);
-            return new ModelAndView("redirect:/usuarios.htm");
+                    sql,  u.getNombre(),u.getCarrera(),u.getTelefono(),u.getCorreo(),id);
+            return new ModelAndView("redirect:/aspirantes.htm");
         
     }
     
-    public Usuario selectUsuario(int id){
-        final Usuario user = new Usuario();
-        String sql = "SELECT * FROM usuarios WHERE id="+id;
-        return (Usuario) jdbcTemplate.query(sql, new ResultSetExtractor<Usuario>(){
-            public Usuario extractData(ResultSet rs) throws SQLException, DataAccessException{
+    public Aspirante selectUsuario(int id){
+        final Aspirante user = new Aspirante();
+        String sql = "SELECT * FROM aspirantes WHERE id="+id;
+        return (Aspirante) jdbcTemplate.query(sql, new ResultSetExtractor<Aspirante>(){
+            public Aspirante extractData(ResultSet rs) throws SQLException, DataAccessException{
                 if(rs.next()){
                     user.setId(rs.getInt("id"));
                     user.setNombre(rs.getString("nombre"));
-                    user.setUsuario(rs.getString("usuario"));
-                    user.setContrasena(rs.getString("contrasena"));
-                    user.setTipo(rs.getString("tipo")); 
-                    user.setFecha(rs.getString("fecha"));
+                    user.setCarrera(rs.getString("carrera"));
+                    user.setTelefono(rs.getInt("telefono"));
+                    user.setCorreo(rs.getString("correo")); 
+                    
                 }
                 return user;
             }
         }  );
     }
+    
     
 }

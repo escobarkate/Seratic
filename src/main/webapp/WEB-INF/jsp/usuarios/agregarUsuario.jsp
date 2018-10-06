@@ -15,21 +15,17 @@
     </head>
     <body>
         <!--Navigation Bar-->
-        <nav id="nav1" class="nav-extended white" role="navigation">
-            <div class="nav-wrapper container">
-              <a id="logo-container" href="login.htm" class="brand-logo">Seratic</a><!--lOGO-->
-              <ul class="right hide-on-med-and-down ">
-                <li><a href="user.htm" >Usuarios</a></li>
-                <li><a href="player.htm">Jugadores</a></li>
-                <li><a href="report.htm">Reportes</a></li>
-              </ul>
-              <!--MENU LATERAL para movil-->      
-              <ul id="nav-mobile" class="side-nav">        
-                <li><a href="user.htm" >Usuarios</a></li>
-                <li><a href="player.htm">Jugadores</a></li>
-                <li><a href="report.htm">Reportes</a></li>      
-              </ul>
-              <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <nav class="liteal lighten-5" role="navigation">
+            <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo right">MonstersUniversity</a>
+                <ul class="left hide-on-med-and-down">
+
+                    <li><a href="cerrar.htm">Cerrar sesión</a></li>
+                    <li><a href="usuarios.htm"> Gestión de usuarios</a></li>
+                    <li><a href="aspirantes.htm">Gestión de aspirantes</a></li>
+                    <li><a href="pruebas.htm">Gestión de pruebas</a></li>
+                    <li><a href="reportes.htm">Reportes</a></li>
+                </ul>
+
             </div>
         </nav>
         <div class="container">

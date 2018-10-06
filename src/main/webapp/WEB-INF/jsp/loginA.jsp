@@ -28,20 +28,20 @@
                     <div class="z-depth-1 grey lighten-3 row" style="display: inline-block; padding: 30px 68px 0px 68px; border: 1px solid #EEE;">
 
                         <form:form method="post" modelAttribute="usuario">
-                            <h5 class="pink-text">Inicio de sesión</h5>
+                            <h5 class="pink-text">Inicio de sesión Aspirante </h5>
                             <div class='row margin'>
                                 <div class='input-field col s12'>
                                     <i class="mdi-social-person-outline prefix"></i>
-                                    <form:label for="icon_prefix" path="usuario">Usuario</form:label>
-                                    <form:input id="icon_prefix" type="text" class="validate" required="true" aria-required="true" path="usuario" />
+                                    <form:label for="icon_prefix" path="correo">Correo</form:label>
+                                    <form:input id="icon_prefix" type="text" class="validate" required="true" aria-required="true" path="correo" />
 
                                 </div>
                             </div>
                             <div class='row margin'>
                                 <div class='input-field col s12'>
                                     <i class="mdi-action-lock-outline prefix"></i>
-                                    <form:label for="icon_prefix1" path="contrasena">Contraseña</form:label>
-                                    <form:input type="password" id="icon_prefix1"  class="validate" required="true" aria-required="true" path="contrasena" />
+                                    <form:label for="icon_prefix1" path="id">Identificación</form:label>
+                                    <form:input type="number" id="icon_prefix1"  class="validate" required="true" aria-required="true" path="id" />
 
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                                         <p class="margin medium-small "><a href="agregarUsuario.htm?">Registrate</a></p>
                                     </div>
                                     <div class="input-field " >
-                                        <p class="margin medium-small "><a href="loginA.htm">Ingresar <br>como aspirante</a></p>
+                                        <p class="margin medium-small "><a href="login.htm">Ingresar como usuario</a></p>
                                     </div>
                                 </div>
 

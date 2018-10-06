@@ -28,46 +28,45 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("login.htm")
 public class LoginController {
-    
-     
+
     private JdbcTemplate jdbcTemplate;
-     public LoginController(){        
+
+    public LoginController() {
         ConexBD con = new ConexBD();
         this.jdbcTemplate = new JdbcTemplate(con.conectar());
     }
-   
-    
+
     @GetMapping
-    public ModelAndView login(HttpServletRequest hsr){        
-      
+    public ModelAndView login(HttpServletRequest hsr) {
+
         HttpSession session = hsr.getSession();
-       String sesion = (String)session.getAttribute("session");
-       
-       if (sesion == "si"){
-            return new ModelAndView("redirect:/home.htm"); 
-       } else {
+        String sesion = (String) session.getAttribute("session");
+
+        if (sesion == "si") {
+            return new ModelAndView("redirect:/home.htm");
+        } else {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("login");
             mav.addObject("usuario", new Usuario());
             return mav;
-            
+
         }
-        
+
     }
-    
-     @PostMapping
-    public ModelAndView login (@ModelAttribute("usuario") Usuario u,
-                                BindingResult result,
-                                SessionStatus status,HttpServletRequest hsr){         
+
+    @PostMapping
+    public ModelAndView login(@ModelAttribute("usuario") Usuario u,
+            BindingResult result,
+            SessionStatus status, HttpServletRequest hsr) {
         HttpSession session = hsr.getSession();
         String pass = Encriptar.Encriptar(u.getContrasena());
-        String sql="SELECT * FROM usuarios WHERE usuario='"+u.getUsuario()+"' AND contrasena='"+pass+"' AND tipo='administrador'";
+        String sql = "SELECT * FROM usuarios WHERE usuario='" + u.getUsuario() + "' AND contrasena='" + pass + "' AND tipo='administrador'";
         List datos = this.jdbcTemplate.queryForList(sql);
-        if (datos.size() > 0){            
+        if (datos.size() > 0) {
             session.setAttribute("session", "si");
-            return new ModelAndView("redirect:/home.htm");            
-        }else{
+            return new ModelAndView("redirect:/home.htm");
+        } else {
             return new ModelAndView("redirect:/login.htm");
-        }                              
         }
+    }
 }

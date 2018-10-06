@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.seratic.prueba.controllers.usuario;
+package com.seratic.prueba.controllers.aspirantes;
 
+import com.seratic.prueba.modelos.Aspirante;
 import com.seratic.prueba.modelos.Usuario;
 import com.seratic.prueba.util.ConexBD;
 import com.seratic.prueba.util.Encriptar;
@@ -27,11 +28,11 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-@RequestMapping("agregarUsuario.htm")
-public class AgregarUController {
-     private JdbcTemplate jdbcTemplate;
+@RequestMapping("agregarAspirante.htm")
+public class AgregarAController {
+    private JdbcTemplate jdbcTemplate;
 
-    public AgregarUController() {
+    public AgregarAController () {
         ConexBD con = new ConexBD();
         this.jdbcTemplate = new JdbcTemplate(con.conectar());
     }
@@ -39,26 +40,26 @@ public class AgregarUController {
     public ModelAndView adduser(HttpServletRequest hsr){   
         HttpSession session = hsr.getSession();
         String sesion = (String)session.getAttribute("session");
-       //if (sesion == "si"){
+        if (sesion == "si"){
             ModelAndView mav = new ModelAndView();
-            mav.setViewName("usuarios/agregarUsuario");
-            mav.addObject("usuario", new Usuario());       
+            mav.setViewName("aspirantes/agregarAspirante");
+            mav.addObject("usuario", new Aspirante());       
             return mav;   
-     //  } else {
-           // return new ModelAndView("redirect:/login.htm");  
-     // }                   
+       } else {
+            return new ModelAndView("redirect:/login.htm");  
+      }                   
     }
     
     @PostMapping
-    public ModelAndView adduser (@ModelAttribute("usuario") Usuario u,
+    public ModelAndView adduser (@ModelAttribute("usuario") Aspirante u,
                                 BindingResult result,
                                 SessionStatus status){
         Date fecha = new Date();
-        String pass = Encriptar.Encriptar(u.getContrasena());//Encrypto la contraseña
+       
             this.jdbcTemplate.update(
-                        "INSERT INTO usuarios (id,nombre,usuario,contrasena,tipo) VALUES (?,?,?,?,?)",
-                        u.getId(),u.getNombre(),u.getUsuario(),pass,u.getTipo());
-            return new ModelAndView("redirect:/usuarios.htm");        
+                        "INSERT INTO aspirantes (id,nombre,carrera,telefono,correo) VALUES (?,?,?,?,?)",
+                        u.getId(),u.getNombre(),u.getCarrera(),u.getTelefono(),u.getCorreo());
+            return new ModelAndView("redirect:/aspirantes.htm");        
     }
     
 }

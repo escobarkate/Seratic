@@ -18,7 +18,7 @@
             <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo right">MonstersUniversity</a>
                 <ul class="left hide-on-med-and-down">
 
-                    <li><a href="login.htm">Cerrar</a></li>
+                    <li><a href="cerrar.htm">Cerrar sesión</a></li>
                     <li><a href="usuarios.htm"> Gestión de usuarios</a></li>
                     <li><a href="aspirantes.htm">Gestión de aspirantes</a></li>
                     <li><a href="pruebas.htm">Gestión de pruebas</a></li>

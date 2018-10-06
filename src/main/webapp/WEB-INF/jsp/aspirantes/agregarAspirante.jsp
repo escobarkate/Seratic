@@ -14,6 +14,7 @@
         <title>Seratic</title>
     </head>
     <body>
+        <!--Navigation Bar-->
         <nav class="liteal lighten-5" role="navigation">
             <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo right">MonstersUniversity</a>
                 <ul class="left hide-on-med-and-down">
@@ -29,41 +30,48 @@
         </nav>
         <div class="container">
             <br/>
-            <center><h4 style="color:grey darken-3">Edición de Usuarios</h4></center>
+            <center><h4 style="color:teal">Registrar Aspirante</h4></center>
             <br/>
             <form:form method="post" modelAttribute="usuario">                           
-                
                 <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">person</i>
+                        <form:input id="icon_prefix" path="id" type="number" class="validate" required="true" aria-required="true"/>
+                        <form:label for="icon_prefix" path="id">Cedula</form:label>                        
+                    </div>
                     <div class="input-field col s6">
                         <i class="material-icons prefix">person</i>
                         <form:input id="icon_prefix" path="nombre" type="text" class="validate" required="true" aria-required="true"/>
                         <form:label for="icon_prefix" path="nombre">Nombre</form:label>                        
                     </div>
-                                        
+                </div>
+                <div class="row">
+                                      
                     <div class="input-field col s6">
                         <i class="material-icons prefix" >account_circle</i>
-                        <form:input id="icon_prefix" path="usuario" type="text" class="validate" required="true" aria-required="true"/>
-                        <form:label for="icon_prefix" path="usuario">Usuario</form:label> 
+                        <form:input id="icon_prefix" path="carrera" type="text" class="validate" required="true" aria-required="true"/>
+                        <form:label for="icon_prefix" path="carrera">Carrera</form:label> 
                     </div>
-                    
+                     <div class="input-field col s6">
+                        <i class="material-icons prefix" >account_circle</i>
+                        <form:input id="icon_prefix" path="telefono" type="number" class="validate" required="true" aria-required="true"/>
+                        <form:label for="icon_prefix" path="telefono">Telefono</form:label> 
+                    </div>
+                     
                                                 
                 </div>
                 <div class="row">
-                      <div class="input-field col s6">
-                        <i class="material-icons prefix" >lock_outline</i>
-                        <form:input id="icon_prefix" path="contrasena" type="password" class="validate" required="true" aria-required="true"/>
-                        <form:label for="icon_prefix" path="contrasena">Contraseña</form:label>                         
+                  
+                    <div class="input-field col s6">                       
+                                <div class="input-field col s6">
+                        <i class="material-icons prefix" >account_circle</i>
+                        <form:input id="icon_prefix" path="correo" type="text" class="validate" required="true" aria-required="true"/>
+                        <form:label for="icon_prefix" path="correo">Correo</form:label> 
                     </div>
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix" >lock_outline</i>
-                        <form:input id="icon_prefix" path="tipo" type="text" class="validate" required="true" aria-required="true"/>
-                        <form:label for="icon_prefix" path="tipo">Tipo</form:label>                         
-                    </div>
-                    
-                   
-                </div>                
+                    </div>                                                                           
+                </div>
                 <br></br>
-                <center><button class="waves-effect waves-yellow btn gray" type="submit" name="submit">Guardar Cambios</button></center>
+                <center><button class="waves-effect waves-yellow btn black" type="submit" name="submit">Agregar</button></center>
             </form:form>                                                                    
         </div>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
@@ -71,8 +79,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
         <!--  Scripts-->
         <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-       
-        
+        <script src="<c:url value='/js/materialize.js'/>"></script>
+        <script src="<c:url value='/js/init.js'/>"></script>  
+        <script>        
+            $('select').material_select();
+        </script>
     </body>
 </html>
 
