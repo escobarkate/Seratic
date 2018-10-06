@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.seratic.prueba.controllers.aspirantes;
+package com.seratic.prueba.controllers.pruebas;
 
 import com.seratic.prueba.modelos.Aspirante;
-import com.seratic.prueba.modelos.Usuario;
+import com.seratic.prueba.modelos.Prueba;
 import com.seratic.prueba.util.ConexBD;
-import com.seratic.prueba.util.Encriptar;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,13 +25,12 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author PLANTA INTERNA
  */
-
 @Controller
-@RequestMapping("agregarPrueba.htm")
-public class AgregarAController {
+@RequestMapping("crearPruebas.htm")
+public class crearPruebaController {
     private JdbcTemplate jdbcTemplate;
 
-    public AgregarAController () {
+    public crearPruebaController () {
         ConexBD con = new ConexBD();
         this.jdbcTemplate = new JdbcTemplate(con.conectar());
     }
@@ -42,8 +40,8 @@ public class AgregarAController {
         String sesion = (String)session.getAttribute("session");
         if (sesion == "si"){
             ModelAndView mav = new ModelAndView();
-            mav.setViewName("aspirantes/agregarAspirante");
-            mav.addObject("usuario", new Aspirante());       
+            mav.setViewName("pruebas/crearPruebas");
+            mav.addObject("usuario", new Prueba());       
             return mav;   
        } else {
             return new ModelAndView("redirect:/login.htm");  
@@ -51,15 +49,17 @@ public class AgregarAController {
     }
     
     @PostMapping
-    public ModelAndView adduser (@ModelAttribute("usuario") Aspirante u,
+    public ModelAndView adduser (@ModelAttribute("usuario") Prueba u,
                                 BindingResult result,
                                 SessionStatus status){
-        Date fecha = new Date();
+    
        
             this.jdbcTemplate.update(
-                        "INSERT INTO aspirantes (id,nombre,carrera,telefono,correo) VALUES (?,?,?,?,?)",
-                        u.getId(),u.getNombre(),u.getCarrera(),u.getTelefono(),u.getCorreo());
-            return new ModelAndView("redirect:/aspirantes.htm");        
+                        "INSERT INTO pruebas (idAspirante,nombreA,carrera,idEvaluador,nombreE,detalle,calificacion,fecha)"
+                                + " VALUES (?,?,?,?,?,?,?,?)",
+                        u.getIdAspirante(),u.getNombreA(),u.getCarrera(),u.getIdEvaluador(),u.getNombreE(),u.getDetalle(),u.getEvaluacion(),
+                        u.getFecha());
+            return new ModelAndView("redirect:/pruebas.htm");        
     }
     
 }

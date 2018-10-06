@@ -1,5 +1,3 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -20,7 +18,7 @@
             <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo right">MonstersUniversity</a>
                 <ul class="left hide-on-med-and-down">
 
-                    <li><a href="login.htm">Cerrar</a></li>
+                    <li><a href="cerrar.htm">Cerrar sesión</a></li>
                     <li><a href="usuarios.htm"> Gestión de usuarios</a></li>
                     <li><a href="aspirantes.htm">Gestión de aspirantes</a></li>
                     <li><a href="pruebas.htm">Gestión de pruebas</a></li>
@@ -29,7 +27,73 @@
 
             </div>
         </nav>
-        <h1>Pruebas</h1>
-    </body>
-</html>
+    <body>             
+        <div class="container">                               
+            <center><h3 style="color:grey darken-3">Gestión de Prueba</h3></center>
+            <br/>   
+            <br/> 
 
+           
+            <table id="tabla" class="striped centered responsive-table">  
+                <thead>                          
+                    <tr>
+                        <th>Prueba</th>
+                        <th>Cedula Aspirante</th>
+                        <th>Nombre</th>
+                        <th>Carrera</th>
+                        <th>Cedula Evaluador</th>
+                        <th>Nombre</th> 
+                        <th>Detalle</th>
+                        <th>Calificacion</th> 
+                        <th>Fecha</th>
+                        <th></th>
+
+                    </tr> 
+                </thead>  
+
+
+                <tbody> 
+                    <c:forEach items="${usuarios}" var="usuarios">  
+                        <tr>                         
+                            <d><c:out value="${usuarios.id}" /></td>
+                            <td><c:out value="${usuarios.idAspirante}" /></td>
+                            <td><c:out value="${usuarios.nombreA}" /></td>
+                            <td><c:out value="${usuarios.carrera}" /></td>
+                            <td><c:out value="${usuarios.IdEvaluador}" /></td>
+                            <td><c:out value="${usuarios.nombreE}" /></td>  
+                            <td><c:out value="${usuarios.detalle}" /></td>
+                            <td><c:out value="${usuarios.calificacion}" /></td>
+                            <td><c:out value="${usuarios.fecha}" /></td>   
+
+                            <td>
+                                <a title="Eliminar" href="<c:url value="eliminarPrueba.htm?id=${usuarios.id}"/>"><i Style="color:#546e7a;" class="material-icons">delete</i></a>
+
+
+                                <a title="Editar" href="<c:url value="editarPruebas.htm?id=${usuarios.id}"/>"><i Style="color:#546e7a;" class="material-icons">edit</i></a>
+                            </td>                                        
+                        </tr>
+
+
+
+                    </c:forEach>
+                <tbody>                                  
+            </table>
+
+            
+
+        </div>
+    </body>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="<c:url value='/js/materialize.js'/>"></script>
+    <script src="<c:url value='/js/init.js'/>"></script>    
+
+    <script>
+        $('.modal').modal();
+    </script> 
+</body>
+</html>

@@ -64,7 +64,7 @@ public class LoginAController {
         List datos = this.jdbcTemplate.queryForList(sql);
         if (datos.size() > 0) {
             session.setAttribute("session", "si");
-            return new ModelAndView("redirect:/home.htm");
+            return new ModelAndView("redirect:/homeA.htm?id="+u.getId());
         } else {
             return new ModelAndView("redirect:/loginA.htm");
         }

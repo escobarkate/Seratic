@@ -19,10 +19,9 @@
                 <ul class="left hide-on-med-and-down">
   
                     <li><a href="cerrar.htm">Cerrar sesión</a></li>
-                    <li><a href="usuarios.htm"> Gestión de usuarios</a></li>
-                    <li><a href="aspirantes.htm">Gestión de aspirantes</a></li>
-                    <li><a href="pruebas.htm">Gestión de pruebas</a></li>
-                    <li><a href="reportes.htm">Reportes</a></li>
+                    <li><a href="pruebas.htm"> Crear prueba</a></li>
+                    <li><a href="">Visualizar pruebas</a></li>
+                
                 </ul>
 
             </div>
@@ -30,9 +29,9 @@
         <div class="section no-pad-bot" id="index-banner">
             <div class="container" onclick="location.href = 'login.htm'" >
                 <br><br>
-                <h1 class="header center orange-text">Bienvenido</h1>
+                <h1 class="header center orange-text">Bienvenido Evaluador</h1>
                 <div class="row center">
-                    <h5 class="header col s12 light">Sistema integral de Admisiones</h5>
+                    <h5 class="header col s12 light">Aqui puedes crear tus pruebas y comparar con pruebas pasadas </h5>
                     
                 </div>
               
@@ -49,37 +48,22 @@
                     <div class="col s12 m4" onclick="location.href = 'usuarios.htm'">
                         <div class="icon-block">
                             <h2 class="center light-blue-text"><i class="material-icons">accessible</i></h2>
-                            <h5 class="center">Gestión de Usuarios</h5>
+                            <h5 class="center">Crear prueba</h5>
 
-                            <p class="light">Facilita la administración de usuarios en el sistema.<br> Crear,Editar,Listar y eliminar suarios</p>
+                            <p class="light">Permite la ceación de pruebas a aspirantes</p>
                         </div>
                     </div>
 
                     <div class="col s12 m4">
                         <div class="icon-block" onclick="location.href = 'aspirantes.htm'">
                             <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
-                            <h5 class="center">Gestión de aspirantes</h5>
+                            <h5 class="center">Visualizar Pruebas</h5>
 
-                            <p class="light">  Permite la administración de aspirantes universitarios.<br> Crear,Editar,Listar y eliminar aspirantes</p>
+                            <p class="light"> Muestra el resultado de evaluaciones pasadas</p>
                         </div>
                     </div>
 
-                    <div class="col s12 m4">
-                        <div class="icon-block "onclick="location.href = 'pruebas.htm'">
-                            <h2 class="center light-blue-text"><i class="material-icons">Pruebas</i></h2>
-                            <h5 class="center">Gestion de Pruebas</h5>
-
-                            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-                        </div>
-                    </div>
-                    <div class="col s12 m4">
-                        <div class="icon-block "onclick="location.href = 'reportes.htm'">
-                            <h2 class="center light-blue-text"><i class="material-icons">Reportes</i></h2>
-                            <h5 class="center">Gestión de reportes</h5>
-
-                            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-                        </div>
-                    </div>
+                   
                 </div>
 
             </div>

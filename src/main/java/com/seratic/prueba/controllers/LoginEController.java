@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.seratic.prueba.controllers.aspirantes;
+package com.seratic.prueba.controllers;
 
-import com.seratic.prueba.modelos.Aspirante;
 import com.seratic.prueba.modelos.Usuario;
 import com.seratic.prueba.util.ConexBD;
 import com.seratic.prueba.util.Encriptar;
-import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,40 +25,47 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author PLANTA INTERNA
  */
-
 @Controller
-@RequestMapping("agregarPrueba.htm")
-public class AgregarAController {
+@RequestMapping("loginE.htm")
+public class LoginEController {
     private JdbcTemplate jdbcTemplate;
 
-    public AgregarAController () {
+    public LoginEController() {
         ConexBD con = new ConexBD();
         this.jdbcTemplate = new JdbcTemplate(con.conectar());
     }
+
     @GetMapping
-    public ModelAndView adduser(HttpServletRequest hsr){   
+    public ModelAndView login(HttpServletRequest hsr) {
+
         HttpSession session = hsr.getSession();
-        String sesion = (String)session.getAttribute("session");
-        if (sesion == "si"){
+        String sesion = (String) session.getAttribute("session");
+
+        if (sesion == "si") {
+            return new ModelAndView("redirect:/home.htm");
+        } else {
             ModelAndView mav = new ModelAndView();
-            mav.setViewName("aspirantes/agregarAspirante");
-            mav.addObject("usuario", new Aspirante());       
-            return mav;   
-       } else {
-            return new ModelAndView("redirect:/login.htm");  
-      }                   
+            mav.setViewName("loginE");
+            mav.addObject("usuario", new Usuario());
+            return mav;
+
+        }
+
     }
-    
+
     @PostMapping
-    public ModelAndView adduser (@ModelAttribute("usuario") Aspirante u,
-                                BindingResult result,
-                                SessionStatus status){
-        Date fecha = new Date();
-       
-            this.jdbcTemplate.update(
-                        "INSERT INTO aspirantes (id,nombre,carrera,telefono,correo) VALUES (?,?,?,?,?)",
-                        u.getId(),u.getNombre(),u.getCarrera(),u.getTelefono(),u.getCorreo());
-            return new ModelAndView("redirect:/aspirantes.htm");        
+    public ModelAndView login(@ModelAttribute("usuario") Usuario u,
+            BindingResult result,
+            SessionStatus status, HttpServletRequest hsr) {
+        HttpSession session = hsr.getSession();
+        String pass = Encriptar.Encriptar(u.getContrasena());
+        String sql = "SELECT * FROM usuarios WHERE usuario='" + u.getUsuario() + "' AND contrasena='" + pass + "' AND tipo='evaluador'";
+        List datos = this.jdbcTemplate.queryForList(sql);
+        if (datos.size() > 0) {
+            session.setAttribute("session", "si");
+            return new ModelAndView("redirect:/homeE.htm?id="+u.getId());
+        } else {
+            return new ModelAndView("redirect:/loginE.htm");
+        }
     }
-    
 }
