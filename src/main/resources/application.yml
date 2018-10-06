@@ -1,0 +1,11 @@
+## YAML Template.
+---
+---
+spring:
+    datasource:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/pruebaseratic
+        username: root
+        password: 1234
+        
+    
